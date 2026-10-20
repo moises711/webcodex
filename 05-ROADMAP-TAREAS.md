@@ -307,3 +307,5 @@ Implementados Motion, escena de circuitos con proyección de profundidad, reveal
 - [x] Informe y requisitos pendientes del hosting en docs/SEGURIDAD.md; comandos security:check y security:maintenance.
 
 - [x] Navegación pública simplificada: retirados los filtros de año, etiqueta y tipo de las áreas; búsqueda dedicada con un campo y botón Buscar.
+
+- [x] Compilación de producción con Webpack y Tailwind PostCSS para evitar el fallo del proceso de loaders de Turbopack reportado en Hostinger.

@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 import { db } from "@/lib/db";
 import { publicWhere } from "@/server/queries/public";
+// Query published content at request time, not in the isolated build container.
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl;
   const [areas, projects] = await Promise.all([

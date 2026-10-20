@@ -16,9 +16,6 @@ const nextConfig: NextConfig = {
     proxyClientMaxBodySize: "6mb",
     serverActions: { bodySizeLimit: "256kb" },
   },
-  turbopack: {
-    rules: { "*.css": { loaders: ["@tailwindcss/turbopack"], as: "*.css" } },
-  },
   images: {
     remotePatterns: storageUrl
       ? [

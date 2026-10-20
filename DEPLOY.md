@@ -125,3 +125,7 @@ El seed de demostración está bloqueado por defecto y siempre bloqueado en prod
 ## Protecciones revisadas · 20/10/2026
 
 Consulta `docs/SEGURIDAD.md` antes de desplegar. Las nuevas imágenes se sirven por `/api/media/` tras comprobar permisos; configura S3/R2 privado y permisos mínimos. `STORAGE_PUBLIC_URL` queda para compatibilidad de imágenes anteriores, no como requisito de las nuevas subidas. Configura HTTPS y el proxy de confianza; no expongas directamente el proceso Node. No caches HTML con nonce CSP. Ejecuta `pnpm security:check` y `pnpm build` antes de publicar. El aviso de desarrollo sin parche se mantiene documentado.
+
+## Compilación en Hostinger
+
+El comando de compilación es `pnpm build` y ejecuta `next build --webpack`. Tailwind CSS 4 se procesa con `@tailwindcss/postcss` desde `postcss.config.mjs`; no se usa el loader de Turbopack. Conservar el lockfile actualizado. Si hPanel tiene un comando personalizado `next build`, sustituirlo por `pnpm build` para aplicar esta configuración.
