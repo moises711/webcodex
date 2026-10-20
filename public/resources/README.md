@@ -1,0 +1,1 @@
+Recursos públicos de la web. Coloca archivos en images, icons, fonts, documents, videos o audio. Un archivo images/ejemplo.webp se usa mediante /resources/images/ejemplo.webp. No guardar archivos privados aquí. Las subidas gestionadas por el panel se guardan fuera de public en .local/resources.

@@ -1,0 +1,690 @@
+/* Shared expressive palette. All decorative colors are defined here as tokens. */
+:root {
+  --dream-base: #eaf2ff;
+  --dream-cyan: #a4c9ef;
+  --dream-blue: #99b5ec;
+  --dream-deepblue: #c0d4f5;
+  --dream-ink: #203654;
+  --dream-accent: #36669d;
+  --dream-muted: #52647d;
+  --glass-fill: color-mix(in srgb, var(--surface) 62%, transparent);
+  --glass-strong: color-mix(in srgb, var(--surface) 83%, transparent);
+  --glass-border: color-mix(in srgb, var(--surface) 82%, var(--sky-200));
+  --glass-shadow: 0 18px 55px
+    color-mix(in srgb, var(--dream-ink) 8%, transparent);
+  --hero-bg: var(--dream-base);
+  --hero-text: var(--dream-ink);
+  --hero-muted: var(--dream-muted);
+  --hero-border: color-mix(in srgb, var(--dream-accent) 24%, transparent);
+  --hero-input-bg: var(--glass-strong);
+  --hero-accent: var(--dream-accent);
+  --scene-line: var(--dream-accent);
+  --scene-accent: var(--brand-600);
+}
+[data-theme="dark"] {
+  --dream-base: #061326;
+  --dream-cyan: #0b416e;
+  --dream-blue: #173b7c;
+  --dream-deepblue: #102d58;
+  --dream-ink: #edf5ff;
+  --dream-accent: #8ecbff;
+  --dream-muted: #abc2df;
+  --glass-fill: color-mix(in srgb, var(--surface) 64%, transparent);
+  --glass-strong: color-mix(in srgb, var(--surface) 88%, transparent);
+  --glass-border: color-mix(in srgb, var(--dream-accent) 24%, transparent);
+}
+body {
+  background: var(--dream-base);
+}
+.atmosphere-shell {
+  min-height: 100dvh;
+  isolation: isolate;
+}
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--dream-base);
+}
+.atmosphere-content {
+  min-height: 100dvh;
+}
+.aurora {
+  position: absolute;
+  width: 75vmax;
+  height: 65vmax;
+  border-radius: 45% 55% 65% 35%;
+  opacity: 0.7;
+  filter: blur(55px);
+  animation: aurora-wander 24s ease-in-out infinite alternate;
+}
+.aurora-cyan {
+  background: radial-gradient(ellipse, var(--dream-cyan), transparent 68%);
+  left: -25vmax;
+  top: -25vmax;
+}
+.aurora-blue {
+  background: radial-gradient(ellipse, var(--dream-blue), transparent 68%);
+  right: -25vmax;
+  top: 5vh;
+  animation-delay: -8s;
+  animation-duration: 29s;
+}
+.aurora-deepblue {
+  background: radial-gradient(ellipse, var(--dream-deepblue), transparent 68%);
+  left: 8vw;
+  bottom: -45vmax;
+  animation-delay: -16s;
+  animation-duration: 32s;
+}
+.atmosphere-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: radial-gradient(
+    var(--dream-accent) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 8px 8px;
+  mask-image: linear-gradient(transparent, var(--text) 45%, transparent);
+}
+.dream-ribbons {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--dream-accent);
+  opacity: 0.22;
+  overflow: visible;
+}
+.ribbon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 850 150;
+  animation: ribbon-flow 35s linear infinite;
+}
+.ribbon-two {
+  opacity: 0.5;
+  animation-direction: reverse;
+}
+.dream-ribbons circle {
+  fill: currentColor;
+}
+.atmosphere-spark {
+  position: absolute;
+  color: var(--dream-accent);
+  opacity: 0.4;
+  font-size: 48px;
+  animation: spark-drift 12s ease-in-out infinite;
+}
+.spark-one {
+  top: 19%;
+  left: 4%;
+}
+.spark-two {
+  top: 65%;
+  right: 5%;
+  font-size: 75px;
+  animation-delay: -4s;
+}
+.spark-three {
+  top: 80%;
+  left: 45%;
+  font-size: 28px;
+  animation-delay: -8s;
+}
+.atmosphere-control {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border-radius: 40px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-strong);
+  color: var(--text);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--glass-shadow);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.atmosphere-control:disabled {
+  cursor: default;
+}
+h1,
+h2 {
+  font-family: var(--font-title), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+h1,
+.page-title h1 {
+  font-size: clamp(48px, 5.5vw, 76px);
+}
+h2,
+.showcase-section h2,
+.connection-callout h2 {
+  font-family: var(--font-title), Georgia, serif;
+  font-size: clamp(38px, 4.5vw, 58px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+h3,
+.area-card h3,
+.project-title-row h3,
+.empty-state h3 {
+  font-family: var(--font-subtitle), sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.12;
+}
+.form-section h2,
+.panel-card h2 {
+  font-size: 36px;
+}
+.rich-content h2,
+.rich-content h3 {
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: normal;
+}
+.public-experience .header {
+  margin: 16px 24px 0;
+  top: 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 26px;
+  background: var(--glass-fill);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--glass-shadow);
+}
+.header-inner {
+  min-height: 78px;
+}
+.immersive-hero {
+  background: transparent;
+  overflow: visible;
+}
+.immersive-hero::before {
+  display: none;
+}
+.immersive-grid {
+  padding-top: 65px;
+  padding-bottom: 50px;
+  gap: 48px;
+}
+.immersive-hero h1 {
+  font-family: var(--font-title), Georgia, serif;
+  font-size: clamp(60px, 6.8vw, 94px);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  font-weight: 700;
+  margin-block: 28px;
+}
+.immersive-hero h1 span {
+  display: inline-block;
+  transform: rotate(-3deg);
+  padding-bottom: 12px;
+}
+.immersive-hero .eyebrow {
+  letter-spacing: 1.6px;
+  font-size: 10px;
+}
+.immersive-hero .hero-description {
+  font-size: 16px;
+}
+.immersive-hero .primary {
+  background: var(--brand-600);
+  color: var(--logo-bg);
+  border-radius: 22px;
+}
+.immersive-hero .search-form input {
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  box-shadow: var(--glass-shadow);
+}
+.hero-scene {
+  background: var(--glass-fill);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 48% 52% 42% 58% / 42% 43% 57% 58%;
+  box-shadow: var(--glass-shadow);
+}
+.scene-logo {
+  border-radius: 40px 15px 40px 15px;
+  box-shadow: var(--glass-shadow);
+  transform: translate(-50%, -50%);
+}
+.scene-area {
+  background: var(--glass-strong);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+}
+.scene-coordinate {
+  top: 35px;
+  left: 30%;
+  letter-spacing: 1px;
+}
+.scene-bottom {
+  left: 18%;
+  right: 18%;
+  bottom: 35px;
+}
+.scene-bottom > span {
+  font-family: var(--font-subtitle), sans-serif;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.connection-strip {
+  background: var(--glass-fill);
+  backdrop-filter: blur(14px);
+  border-color: var(--glass-border);
+  transform: rotate(-1deg);
+}
+.connection-track > span {
+  font-family: var(--font-subtitle), sans-serif;
+  font-weight: 400;
+  font-size: 27px;
+  letter-spacing: 1px;
+}
+.area-card,
+.project-card,
+.panel-card,
+.form-section,
+.empty-state,
+.brand-panel,
+.notice {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--glass-shadow);
+  border-radius: 28px;
+}
+.area-card {
+  border-radius: 34px 34px 15px 34px;
+}
+.area-grid > div:nth-child(even) .area-card {
+  border-radius: 34px 15px 34px 34px;
+}
+.area-icon {
+  border-radius: 16px 9px 16px 9px;
+}
+.project-image {
+  border-radius: 20px;
+}
+.connection-callout {
+  background: var(--glass-fill);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 48px 18px 48px 18px;
+}
+.public-experience .footer {
+  background: var(--glass-fill);
+  backdrop-filter: blur(14px);
+  border-color: var(--glass-border);
+  padding-bottom: 75px;
+}
+.panel-sidebar {
+  background: var(--glass-fill);
+  backdrop-filter: blur(20px);
+  border-color: var(--glass-border);
+}
+.panel-topbar {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 16px 20px;
+  backdrop-filter: blur(18px);
+}
+.panel-main {
+  padding-bottom: 85px;
+}
+.panel-sidebar nav a {
+  border-radius: 18px;
+}
+.login-shell .panel-card {
+  padding: 36px;
+  border-radius: 40px 20px 40px 20px;
+}
+input,
+textarea,
+select,
+.tiptap,
+.editor-toolbar,
+.table-wrap,
+.upload-drop {
+  background: var(--glass-strong);
+}
+.button,
+.theme-toggle {
+  border-radius: 20px;
+}
+.badge {
+  border-radius: 12px;
+}
+@keyframes aurora-wander {
+  from {
+    transform: translate3d(-4%, -3%, 0) rotate(-8deg) scale(0.9);
+  }
+  to {
+    transform: translate3d(12%, 9%, 0) rotate(18deg) scale(1.15);
+  }
+}
+@keyframes ribbon-flow {
+  to {
+    stroke-dashoffset: -2000;
+  }
+}
+@keyframes spark-drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(-24px) rotate(20deg);
+  }
+}
+.atmosphere-shell[data-visible="false"] *,
+.atmosphere-shell[data-visible="false"] *::before,
+.atmosphere-shell[data-visible="false"] *::after {
+  animation-play-state: paused !important;
+}
+.atmosphere-shell[data-motion="reduced"] *,
+.atmosphere-shell[data-motion="reduced"] *::before,
+.atmosphere-shell[data-motion="reduced"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.atmosphere-shell[data-motion="reduced"] .interactive-card {
+  transform: none !important;
+}
+@media (max-width: 767px) {
+  .public-experience .header {
+    margin: 10px 10px 0;
+    top: 8px;
+    border-radius: 20px;
+  }
+  .header-inner {
+    min-height: 68px;
+    padding-inline: 14px;
+  }
+  .immersive-grid {
+    padding-top: 42px;
+    gap: 26px;
+  }
+  .immersive-hero h1 {
+    font-size: clamp(57px, 10vw, 76px);
+    letter-spacing: -0.03em;
+  }
+  .hero-scene {
+    height: 370px;
+    border-radius: 40% 60% 42% 58% / 40% 46% 54% 60%;
+  }
+  .scene-bottom {
+    left: 17%;
+    right: 17%;
+    bottom: 26px;
+  }
+  .scene-bottom > span {
+    font-size: 17px;
+  }
+  .scene-coordinate {
+    top: 28px;
+  }
+  .aurora {
+    filter: blur(35px);
+  }
+  .showcase-section h2,
+  .connection-callout h2 {
+    font-size: 42px;
+  }
+  .connection-callout {
+    padding: 26px;
+  }
+  .connection-callout h2 {
+    font-size: 36px;
+  }
+  .atmosphere-control {
+    right: 12px;
+    bottom: 12px;
+    padding: 10px;
+  }
+  .atmosphere-control span {
+    display: none;
+  }
+  .login-shell .panel-card {
+    padding: 25px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-shell *,
+  .atmosphere-shell *::before,
+  .atmosphere-shell *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+[data-theme="dark"] .immersive-hero .primary {
+  color: var(--dream-base);
+}
+
+/* Reference typography: Alice titles and Pompiere subtitles, without synthetic bold. */
+h1,
+h2,
+.immersive-hero h1,
+.showcase-section h2,
+.connection-callout h2 {
+  font-weight: 400;
+  font-synthesis: none;
+}
+.immersive-hero h1 {
+  font-size: clamp(42px, 4.9vw, 68px);
+  line-height: 1.13;
+  letter-spacing: -0.035em;
+}
+.immersive-hero h1 span {
+  transform: none;
+}
+h2,
+.showcase-section h2 {
+  font-size: clamp(30px, 3.3vw, 44px);
+}
+.connection-callout h2 {
+  font-size: clamp(28px, 3vw, 40px);
+}
+.form-section h2,
+.panel-card h2 {
+  font-size: 28px;
+}
+.immersive-hero .hero-description,
+.section-intro > p,
+.section-heading > p,
+.scene-bottom > span {
+  font-family: var(--font-subtitle), sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+.immersive-hero .hero-description {
+  font-size: 27px;
+  line-height: 1.4;
+}
+.section-intro > p,
+.section-heading > p {
+  font-size: 24px;
+  line-height: 1.35;
+}
+.area-card h3,
+.project-title-row h3,
+.empty-state h3 {
+  font-weight: 400;
+  font-synthesis: none;
+}
+@media (max-width: 767px) {
+  .immersive-hero h1 {
+    font-size: clamp(39px, 8vw, 55px);
+  }
+  .immersive-hero .hero-description {
+    font-size: 25px;
+  }
+  .showcase-section h2,
+  .connection-callout h2 {
+    font-size: 32px;
+  }
+}
+
+/* The systems carousel shares the homepage glass ribbon. */
+.connection-strip.technology-strip {
+  background: var(--glass-fill);
+  border-color: var(--glass-border);
+  padding-block: 22px;
+}
+.connection-track.technology-track {
+  animation-duration: 90s;
+}
+.connection-track > .technology-run {
+  gap: 42px;
+  padding-inline: 22px;
+}
+.technology-run .technology-chip {
+  gap: 16px;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.technology-run .technology-chip img {
+  border-radius: 50%;
+  padding: 3px;
+}
+@media (max-width: 767px) {
+  .connection-strip.technology-strip {
+    padding-block: 18px;
+  }
+  .connection-track > .technology-run {
+    gap: 28px;
+    font-size: 23px;
+  }
+  .technology-run .technology-chip {
+    gap: 12px;
+  }
+  .technology-run .technology-chip img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Lightweight default: keep identity without continuous background painting. */
+.atmosphere-shell[data-effects="light"] .atmosphere {
+  background:
+    radial-gradient(ellipse at 5% 5%, var(--dream-cyan), transparent 55%),
+    radial-gradient(ellipse at 95% 75%, var(--dream-blue), transparent 60%),
+    var(--dream-base);
+}
+.atmosphere-shell[data-effects="light"] .aurora,
+.atmosphere-shell[data-effects="light"] .atmosphere-grain {
+  display: none;
+}
+.atmosphere-shell[data-effects="light"] .ribbon,
+.atmosphere-shell[data-effects="light"] .atmosphere-spark,
+.atmosphere-shell[data-effects="light"] .scene-orbit,
+.atmosphere-shell[data-effects="light"] .scene-area,
+.atmosphere-shell[data-effects="light"] .footer-circuit * {
+  animation: none;
+}
+.atmosphere-shell[data-effects="light"]
+  :is(
+    .header,
+    .immersive-hero,
+    .hero-scene,
+    .scene-logo,
+    .scene-area,
+    .connection-strip,
+    .area-card,
+    .project-card,
+    .panel-card,
+    .form-section,
+    .empty-state,
+    .brand-panel,
+    .notice,
+    .connection-callout,
+    .footer,
+    .panel-sidebar,
+    .panel-topbar,
+    .auth-card,
+    .search-form input
+  ) {
+  backdrop-filter: none !important;
+}
+.atmosphere-shell[data-effects="light"]
+  :is(
+    .area-card,
+    .project-card,
+    .panel-card,
+    .form-section,
+    .panel-sidebar,
+    .panel-topbar,
+    .auth-card,
+    .search-form input
+  ) {
+  background: var(--glass-strong);
+}
+
+/* Section entrances and interactive feedback. */
+@keyframes light-entrance {
+  from {
+    opacity: 0.55;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.atmosphere-shell .hero-copy h1,
+.atmosphere-shell .hero-description,
+.atmosphere-shell .areas-dropdown {
+  animation: light-entrance 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.atmosphere-shell .interactive-card {
+  transition:
+    transform 180ms ease-out,
+    border-color 180ms ease-out;
+}
+.atmosphere-shell .interactive-card::after {
+  display: none;
+}
+.atmosphere-shell .interactive-card:is(:hover, :focus-visible) {
+  transform: translateY(-3px);
+  box-shadow: var(--glass-shadow);
+}
+.atmosphere-shell .button {
+  transition:
+    transform 160ms ease-out,
+    background-color 160ms ease-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .atmosphere-shell .button:not(:disabled):hover {
+    transform: translateY(-2px);
+  }
+}
+.atmosphere-shell .button:not(:disabled):active {
+  transform: translateY(0) scale(0.99);
+}
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-shell :is(.hero-copy h1, .hero-description, .areas-dropdown) {
+    animation: none;
+  }
+  .atmosphere-shell .interactive-card:is(:hover, :focus-visible),
+  .atmosphere-shell .button:not(:disabled):is(:hover, :active) {
+    transform: none;
+  }
+}

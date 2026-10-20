@@ -1,0 +1,189 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  AREA_ADMIN
+  EDITOR
+  INTERNAL
+}
+
+enum ProjectType {
+  PROJECT
+  SYSTEM
+  WEBSITE
+}
+
+enum ProjectStatus {
+  DRAFT
+  IN_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum CredentialVisibility {
+  PUBLIC
+  INTERNAL
+  HIDDEN
+}
+
+model User {
+  id                 String     @id @default(cuid())
+  name               String
+  email              String     @unique @db.VarChar(254)
+  passwordHash       String
+  role               Role       @default(EDITOR)
+  isActive           Boolean    @default(true)
+  mustChangePassword Boolean    @default(true)
+  sessionVersion     Int        @default(0)
+  areas              UserArea[]
+  createdProjects    Project[]  @relation("CreatedProjects")
+  updatedProjects    Project[]  @relation("UpdatedProjects")
+  audits             AuditLog[]
+  createdAt          DateTime   @default(now())
+}
+
+model Area {
+  id            String     @id @default(cuid())
+  name          String     @unique
+  slug          String     @unique
+  description   String?    @db.Text
+  color         String     @default("#2F86C8")
+  icon          String?
+  coverImageUrl String?    @db.Text
+  seoTitle String? @db.VarChar(160)
+  seoDescription String? @db.VarChar(300)
+  seoKeywords String? @db.VarChar(1000)
+  order         Int        @default(0)
+  isActive      Boolean    @default(true)
+  users         UserArea[]
+  projects      Project[]
+}
+
+model UserArea {
+  userId    String
+  areaId    String
+  isManager Boolean @default(false)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  area      Area    @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@id([userId, areaId])
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  areaId        String
+  area          Area          @relation(fields: [areaId], references: [id])
+  title         String
+  slug          String        @unique
+  summary       String        @db.Text
+  content       Json?
+  type          ProjectType   @default(PROJECT)
+  status        ProjectStatus @default(DRAFT)
+  workDate      DateTime?     @db.Date
+  year          Int?
+  tags          Json          @default("[]")
+  techStack     Json          @default("[]")
+  isFeatured    Boolean       @default(false)
+  coverLinkUrl  String?       @db.Text
+  coverLinkText String?
+  coverMediaId  String?       @unique
+  cover         Media?        @relation("Cover", fields: [coverMediaId], references: [id], onDelete: SetNull)
+  publishedAt   DateTime?
+  createdById   String
+  createdBy     User          @relation("CreatedProjects", fields: [createdById], references: [id])
+  updatedById   String?
+  updatedBy     User?         @relation("UpdatedProjects", fields: [updatedById], references: [id])
+  media         Media[]       @relation("ProjectMedia")
+  system        SystemInfo?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([areaId, status])
+  @@index([status, publishedAt])
+}
+
+model Media {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation("ProjectMedia", fields: [projectId], references: [id], onDelete: Cascade)
+  coverFor   Project? @relation("Cover")
+  url        String   @db.Text
+  storageKey String   @db.Text
+  alt        String   @db.Text
+  width      Int?
+  height     Int?
+  order      Int      @default(0)
+
+  @@index([projectId, order])
+}
+
+model SystemInfo {
+  id                   String               @id @default(cuid())
+  projectId            String               @unique
+  project              Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  systemName           String
+  url                  String               @db.Text
+  environment          String               @default("demo")
+  credentialVisibility CredentialVisibility @default(INTERNAL)
+  credentials          DemoCredential[]
+}
+
+model DemoCredential {
+  id           String     @id @default(cuid())
+  systemInfoId String
+  system       SystemInfo @relation(fields: [systemInfoId], references: [id], onDelete: Cascade)
+  label        String
+  username     String
+  passwordEnc  String     @db.Text
+  notes        String?    @db.Text
+  isActive     Boolean    @default(true)
+}
+
+model SiteSettings {
+  id            Int     @id @default(1)
+  siteName      String  @default("Códex Cusco")
+  logoUrl       String? @db.Text
+  contactEmail  String?
+  socials       Json?
+  requireReview Boolean @default(false)
+  notice        String? @db.Text
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model LoginAttempt {
+  key       String   @id
+  attempts  Int      @default(0)
+  expiresAt DateTime
+}
+
+model PasswordReset {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+}
+
+model PageVisit {
+  id        String   @id @db.Char(36)
+  createdAt DateTime @default(now())
+}

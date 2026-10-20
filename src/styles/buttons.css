@@ -1,0 +1,110 @@
+/* Shared action controls across public pages, administration and forms. */
+.atmosphere-shell .button,
+.atmosphere-shell .text-link,
+.atmosphere-shell .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none;
+  clip-path: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+.atmosphere-shell .button.primary {
+  background: var(--brand-600);
+  color: var(--surface);
+  border-color: var(--brand-600);
+}
+.atmosphere-shell .button.secondary,
+.atmosphere-shell .button.ghost,
+.atmosphere-shell .text-link,
+.atmosphere-shell .theme-toggle {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border);
+}
+.atmosphere-shell .button.destructive {
+  background: var(--danger);
+  color: var(--logo-bg);
+  border-color: var(--danger);
+}
+.atmosphere-shell .button.primary:hover {
+  background: color-mix(in srgb, var(--brand-600) 88%, var(--text));
+  border-color: color-mix(in srgb, var(--brand-600) 88%, var(--text));
+  transform: none;
+}
+.atmosphere-shell .button.secondary:hover,
+.atmosphere-shell .button.ghost:hover,
+.atmosphere-shell .text-link:hover,
+.atmosphere-shell .theme-toggle:hover {
+  background: var(--brand-100);
+  border-color: var(--brand-600);
+  color: var(--text);
+  transform: none;
+}
+.atmosphere-shell .button.destructive:hover {
+  background: color-mix(in srgb, var(--danger) 85%, var(--text));
+  transform: none;
+}
+.atmosphere-shell .button.primary::after {
+  content: none;
+}
+.atmosphere-shell .button:focus-visible,
+.atmosphere-shell .text-link:focus-visible,
+.atmosphere-shell .theme-toggle:focus-visible {
+  outline: 2px solid var(--brand-600);
+  outline-offset: 3px;
+}
+.atmosphere-shell .button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.atmosphere-shell .button-small {
+  min-height: 36px;
+  padding: 7px 11px;
+  font-size: 13px;
+}
+.atmosphere-shell .panel-shell .button {
+  font-size: 13px;
+  min-height: 40px;
+  padding: 9px 13px;
+}
+.atmosphere-shell .editor-toolbar .button {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.atmosphere-shell .pagination a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+}
+@media (max-width: 640px) {
+  .atmosphere-shell .button,
+  .atmosphere-shell .panel-shell .button,
+  .atmosphere-shell .text-link,
+  .atmosphere-shell .theme-toggle {
+    min-height: 44px;
+  }
+}

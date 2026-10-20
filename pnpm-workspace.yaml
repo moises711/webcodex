@@ -1,0 +1,11 @@
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  prisma: true
+  esbuild: true
+  unrs-resolver: true
+
+# Security fixes for transitive dependencies; validated with Prisma and the build.
+overrides:
+  'effect@<3.20.0': '^3.20.0'
+  'deepmerge-ts@<8.0.0': '^8.0.0'
