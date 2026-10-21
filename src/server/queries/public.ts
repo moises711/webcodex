@@ -1,3 +1,4 @@
+import { portalAreas } from "@/lib/areas";
 import "server-only";
 import { correctPublicCopy, publicProjectCopy } from "@/lib/public-copy";
 import { projectLists } from "@/lib/string-list";
@@ -28,7 +29,7 @@ const projectSelect = {
 export const getAreas = unstable_cache(
   async () =>
     db.area.findMany({
-      where: { isActive: true },
+      where: { isActive: true, slug: { in: portalAreas.map((area) => area.slug) } },
       orderBy: { order: "asc" },
       select: {
         id: true,
