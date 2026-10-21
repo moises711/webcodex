@@ -1,4 +1,5 @@
 import "server-only";
+import { correctPublicCopy, publicProjectCopy } from "@/lib/public-copy";
 import { projectLists } from "@/lib/string-list";
 import { db } from "@/lib/db";
 import { unstable_cache } from "next/cache";
@@ -40,7 +41,7 @@ export const getAreas = unstable_cache(
         _count: { select: { projects: { where: { status: "PUBLISHED" } } } },
       },
     }),
-  ["areas-direct-seo-v2"],
+  ["areas-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );
 export const getHome = unstable_cache(
@@ -55,15 +56,15 @@ export const getHome = unstable_cache(
       }),
       db.project.count({ where: publicWhere }),
     ]);
-    return { areas, projects: projects.map(projectLists), total };
+    return { areas, projects: projects.map((project) => publicProjectCopy(projectLists(project))), total };
   },
-  ["home-direct-seo-v2"],
+  ["home-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );
 export const getArea = unstable_cache(
   async (slug: string) =>
     db.area.findFirst({ where: { slug, isActive: true } }),
-  ["area-direct-seo-v2"],
+  ["area-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );
 async function queryProjects({
@@ -111,7 +112,7 @@ async function queryProjects({
     db.project.count({ where }),
   ]);
   return {
-    projects: projects.map(projectLists),
+    projects: projects.map((project) => publicProjectCopy(projectLists(project))),
     total,
     page: current,
     pages: Math.ceil(total / 9),
@@ -125,7 +126,7 @@ const getCachedCatalog = unstable_cache(
       year: year || undefined,
       page,
     }),
-  ["public-project-catalog-direct-seo-v2"],
+  ["public-project-catalog-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );
 export async function findProjects(
@@ -176,9 +177,9 @@ export const getProject = unstable_cache(
         },
       },
     });
-    return project ? projectLists(project) : null;
+    return project ? publicProjectCopy(projectLists(project)) : null;
   },
-  ["project-direct-seo-v2"],
+  ["project-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );
 export const getSettings = unstable_cache(
@@ -261,8 +262,8 @@ export const getShowcaseSlides = unstable_cache(
         id: image.id,
         url: image.url,
         alt: image.alt,
-        title: image.project.title,
-        description: image.project.summary,
+        title: correctPublicCopy(image.project.title),
+        description: correctPublicCopy(image.project.summary),
         area: image.project.area.name,
         href: `/proyectos/${image.project.slug}`,
         type: image.project.type,
@@ -276,6 +277,6 @@ export const getShowcaseSlides = unstable_cache(
       })),
     ];
   },
-  ["showcase-slides-direct-seo-v2"],
+  ["showcase-slides-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
 );

@@ -176,7 +176,7 @@ export default async function Home() {
             <h2>
               Las mejores soluciones
               <br />
-              se construyen juntos.
+              se construyen en equipo.
             </h2>
           </div>
           <Link
