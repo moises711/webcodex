@@ -2202,3 +2202,6 @@ a.service-feature:hover {
     min-height: 64px;
   }
 }
+
+.breadcrumb-list { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin-block: 1rem; }
+.breadcrumb-list li + li::before { content: "/"; margin-inline-end: .5rem; }

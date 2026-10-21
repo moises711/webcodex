@@ -1,9 +1,11 @@
+import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { getSettings } from "@/server/queries/public";
 export const metadata = { title: "Aviso" };
 export default async function Page() {
   const settings = await getSettings();
   return (
     <div className="container section">
+      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Aviso", href: "/aviso"}]} />
       <h1>Aviso del portal</h1>
       <div className="panel-card rich-content">
         <p>

@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { PublicHero } from "@/components/public/public-hero";
@@ -9,6 +10,7 @@ export const metadata = pageMetadata(
 export default function ContactPage() {
   return (
     <div className="container section contact-page">
+      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Contacto", href: "/contactanos"}]} />
       <PublicHero>
         <p className="eyebrow">ESTAMOS PARA AYUDARTE</p>
         <h1>Hablemos de tu próximo proyecto.</h1>

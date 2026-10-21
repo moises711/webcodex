@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import { PublicHero } from "@/components/public/public-hero";
 import Link from "next/link";
@@ -13,6 +14,7 @@ export default async function Page() {
   const settings = await getSettings();
   return (
     <div className="container section">
+      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Empresa", href: "/empresa"}]} />
       <PublicHero>
         <p className="eyebrow">EMPRESA · IDENTIDAD · EQUIPO</p>
         <h1>Quiénes somos</h1>

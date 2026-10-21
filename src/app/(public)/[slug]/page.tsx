@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { requestNonce } from "@/lib/nonce";
 import { portalAreas } from "@/lib/areas";
 import { pageMetadata, jsonLd, siteUrl } from "@/lib/seo";
@@ -61,9 +62,7 @@ export default async function Page({
           }),
         }}
       />
-      <Link className="text-link" href="/servicios">
-        Todos los servicios
-      </Link>
+      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Servicios", href: "/servicios"}, {name: area.name, href: path}]} />
       <PublicHero areaIds={[area.id]} label={`Imágenes de ${area.name}`}>
         <p className="eyebrow">SERVICIOS DE CÓDEX CUSCO</p>
         <h1>{area.slug === "sistemas" ? systemsTitle : area.name}</h1>

@@ -1,5 +1,6 @@
+import { businessStructuredData } from "@/lib/structured-data";
 import { requestNonce } from "@/lib/nonce";
-import { jsonLd, siteUrl } from "@/lib/seo";
+import { jsonLd } from "@/lib/seo";
 import { LoginShortcut } from "@/components/public/login-shortcut";
 import { PublicExperience } from "@/components/motion/public-experience";
 import { Header } from "@/components/public/header";
@@ -15,24 +16,7 @@ export default async function Layout({
         nonce={await requestNonce()}
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLd({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "@id": `${siteUrl}/#organization`,
-            name: "Códex Cusco",
-            alternateName: "Codex Cusco",
-            description:
-              "Diseño y desarrollo de páginas web, software y servicios tecnológicos en Cusco, Perú.",
-            url: siteUrl,
-            logo: `${siteUrl}/resources/images/codex-cusco-logo.png`,
-            email: "codexcusco@gmail.com",
-            telephone: "+51957258762",
-            areaServed: "Cusco, Perú",
-            sameAs: [
-              "https://www.facebook.com/share/19a2DKsK4Z/",
-              "https://instagram.com/cuscocodex",
-            ],
-          }),
+          __html: jsonLd(businessStructuredData()),
         }}
       />
       <LoginShortcut />
