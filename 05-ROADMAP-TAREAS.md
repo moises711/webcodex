@@ -309,3 +309,18 @@ Implementados Motion, escena de circuitos con proyección de profundidad, reveal
 - [x] Navegación pública simplificada: retirados los filtros de año, etiqueta y tipo de las áreas; búsqueda dedicada con un campo y botón Buscar.
 
 - [x] Compilación de producción con Webpack y Tailwind PostCSS para evitar el fallo del proceso de loaders de Turbopack reportado en Hostinger.
+
+## Auditoría SEO técnico y on-page — 21/10/2026
+
+- [x] 1. HTML público del servidor sin loading global; carga del panel conservada.
+- [x] 2. Sitemap, robots y redirecciones de rutas de servicios antiguas.
+- [x] 3. ProfessionalService, Service y BreadcrumbList con datos reales.
+- [x] 4. Títulos, descripciones y un H1 por página orientados a Cusco.
+- [x] 5. Alcance, proceso, FAQ visible y FAQPage en los cuatro servicios.
+- [x] 6. Alternativas de imágenes, prioridad LCP y revisión CLS; LCP local 5,0 s requiere seguimiento.
+- [x] 7. Ortografía pública y navegación sin alterar URLs ni credenciales.
+- [x] 8. Contadores del catálogo con una sola cifra renderizada en servidor.
+- [x] 9. Enlaces entre servicios, fichas de proyectos y contacto.
+- [x] 10. Canonical, Open Graph, Twitter y comprobador HTTP reproducible.
+- [x] Lint, TypeScript, compilación Hostinger y 71 pruebas locales.
+- [ ] Revisar Core Web Vitals de campo y evolución de consultas en Search Console.

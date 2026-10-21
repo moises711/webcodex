@@ -15,7 +15,12 @@ export default async function Page() {
   const areas = await getAreas();
   return (
     <div className="container section">
-      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Servicios", href: "/servicios"}]} />
+      <Breadcrumbs
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Servicios", href: "/servicios" },
+        ]}
+      />
       <PublicHero>
         <p className="eyebrow">NUESTROS EQUIPOS</p>
         <h1>Servicios tecnológicos en Cusco</h1>

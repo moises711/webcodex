@@ -20,7 +20,9 @@ export async function generateMetadata({
   const seo = getServiceSeo(area.slug);
   return pageMetadata(
     area.seoTitle || seo?.title || `${area.name} en Cusco, Perú`,
-    area.seoDescription || seo?.description || `${area.description || area.name} Servicios de Códex Cusco en Cusco, Perú.`,
+    area.seoDescription ||
+      seo?.description ||
+      `${area.description || area.name} Servicios de Códex Cusco en Cusco, Perú.`,
     `/${area.slug}`,
     area.seoKeywords || undefined,
   );
@@ -50,15 +52,20 @@ export default async function Page({
             "@type": "Service",
             name: seo?.title || area.name,
             description:
-              area.seoDescription ||
-              seo?.description || area.description,
+              area.seoDescription || seo?.description || area.description,
             url: `${siteUrl}/${area.slug}`,
             provider: { "@id": `${siteUrl}/#organization` },
             areaServed: "Cusco, Perú",
           }),
         }}
       />
-      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Servicios", href: "/servicios"}, {name: area.name, href: path}]} />
+      <Breadcrumbs
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Servicios", href: "/servicios" },
+          { name: area.name, href: path },
+        ]}
+      />
       <PublicHero areaIds={[area.id]} label={`Imágenes de ${area.name}`}>
         <p className="eyebrow">SERVICIOS DE CÓDEX CUSCO</p>
         <h1>{seo?.title || area.name}</h1>

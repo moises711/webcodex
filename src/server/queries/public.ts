@@ -29,7 +29,10 @@ const projectSelect = {
 export const getAreas = unstable_cache(
   async () =>
     db.area.findMany({
-      where: { isActive: true, slug: { in: portalAreas.map((area) => area.slug) } },
+      where: {
+        isActive: true,
+        slug: { in: portalAreas.map((area) => area.slug) },
+      },
       orderBy: { order: "asc" },
       select: {
         id: true,
@@ -57,7 +60,13 @@ export const getHome = unstable_cache(
       }),
       db.project.count({ where: publicWhere }),
     ]);
-    return { areas, projects: projects.map((project) => publicProjectCopy(projectLists(project))), total };
+    return {
+      areas,
+      projects: projects.map((project) =>
+        publicProjectCopy(projectLists(project)),
+      ),
+      total,
+    };
   },
   ["home-public-seo-v3"],
   { tags: ["catalog"], revalidate: 60 },
@@ -113,7 +122,9 @@ async function queryProjects({
     db.project.count({ where }),
   ]);
   return {
-    projects: projects.map((project) => publicProjectCopy(projectLists(project))),
+    projects: projects.map((project) =>
+      publicProjectCopy(projectLists(project)),
+    ),
     total,
     page: current,
     pages: Math.ceil(total / 9),

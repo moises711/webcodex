@@ -65,7 +65,10 @@ export function ProjectCard({
         {project.cover && (
           <Image
             src={project.cover.url}
-            alt={descriptiveImageAlt(project.cover.alt, `Vista de ${project.title}, proyecto de ${project.area.name} de Códex Cusco`)}
+            alt={descriptiveImageAlt(
+              project.cover.alt,
+              `Vista de ${project.title}, proyecto de ${project.area.name} de Códex Cusco`,
+            )}
             fill
             sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 33vw"
             unoptimized={project.cover.url.startsWith("/api/media/")}
@@ -105,7 +108,9 @@ export function ProjectCard({
       >
         {content}
       </a>
-      <Link className="project-detail-link" href={`/proyectos/${project.slug}`}>Ver ficha de {project.title}</Link>
+      <Link className="project-detail-link" href={`/proyectos/${project.slug}`}>
+        Ver ficha de {project.title}
+      </Link>
     </article>
   ) : (
     <InteractiveCard

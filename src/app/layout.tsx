@@ -1,7 +1,7 @@
 import { requestNonce } from "@/lib/nonce";
 import { MobileNavigation } from "@/components/public/mobile-navigation";
 import type { Metadata } from "next";
-import { siteUrl } from "@/lib/seo";
+import { pageMetadata, siteUrl } from "@/lib/seo";
 import localFont from "next/font/local";
 import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -40,6 +40,11 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 export const metadata: Metadata = {
+  ...pageMetadata(
+    "Códex Cusco | Páginas web, software y servicios tecnológicos en Cusco",
+    "Páginas web, desarrollo de software, ciberseguridad, marketing digital y soporte técnico en Cusco, Perú.",
+    "/",
+  ),
   metadataBase: new URL(siteUrl),
   title: {
     default: "Códex Cusco | Software, páginas web y marketing en Cusco",
@@ -54,13 +59,6 @@ export const metadata: Metadata = {
   },
   description:
     "Desarrollo de software y páginas web, marketing digital, ciberseguridad y soporte técnico en Cusco, Perú. Soluciones digitales para tu negocio.",
-  openGraph: {
-    title: "Códex Cusco",
-    description: "Proyectos y sistemas de nuestros equipos",
-    images: ["/resources/images/codex-cusco.jpeg"],
-    locale: "es_PE",
-    type: "website",
-  },
 };
 export default async function RootLayout({
   children,

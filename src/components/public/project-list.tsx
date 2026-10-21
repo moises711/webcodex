@@ -37,7 +37,10 @@ export async function ProjectList({
   }
   return (
     <>
-      <p className="notice">{data.total} proyectos encontrados</p>
+      <p className="notice">
+        {data.total}{" "}
+        {data.total === 1 ? "proyecto encontrado" : "proyectos encontrados"}
+      </p>
       {data.projects.length ? (
         <div className="cards-grid">
           {data.projects.map((p) => (

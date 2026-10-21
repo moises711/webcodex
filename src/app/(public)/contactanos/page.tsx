@@ -11,7 +11,12 @@ export const metadata = pageMetadata(
 export default function ContactPage() {
   return (
     <div className="container section contact-page">
-      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Contacto", href: "/contactanos"}]} />
+      <Breadcrumbs
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Contacto", href: "/contactanos" },
+        ]}
+      />
       <PublicHero>
         <p className="eyebrow">ESTAMOS PARA AYUDARTE</p>
         <h1>Contacta con Códex Cusco para tu proyecto</h1>

@@ -75,7 +75,7 @@ export function Navigation({
           aria-current={path === "/empresa" ? "page" : undefined}
           onClick={close}
         >
-          quienes somos
+          Quiénes somos
         </Link>
         <div className="areas-navigation">
           <button

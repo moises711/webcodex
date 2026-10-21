@@ -7,8 +7,17 @@ export function pageMetadata(
   path: string,
   keywords?: string,
 ): Metadata {
+  const brandedTitle = title.includes("Códex Cusco")
+    ? title
+    : `${title} | Códex Cusco`;
+  const images = [
+    {
+      url: `${siteUrl}/resources/images/codex-cusco.jpeg`,
+      alt: "Códex Cusco: soluciones tecnológicas en Cusco, Perú",
+    },
+  ];
   return {
-    title,
+    title: title.includes("Códex Cusco") ? { absolute: title } : title,
     description,
     alternates: { canonical: `${siteUrl}${path}` },
     ...(keywords
@@ -20,19 +29,19 @@ export function pageMetadata(
         }
       : {}),
     openGraph: {
-      title: `${title} | Códex Cusco`,
+      title: brandedTitle,
       description,
       url: `${siteUrl}${path}`,
       siteName: "Códex Cusco",
       locale: "es_PE",
       type: "website",
-      images: ["/resources/images/codex-cusco.jpeg"],
+      images,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: brandedTitle,
       description,
-      images: ["/resources/images/codex-cusco.jpeg"],
+      images,
     },
   };
 }

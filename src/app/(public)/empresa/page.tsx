@@ -14,7 +14,12 @@ export default async function Page() {
   const settings = await getSettings();
   return (
     <div className="container section">
-      <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Empresa", href: "/empresa"}]} />
+      <Breadcrumbs
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Empresa", href: "/empresa" },
+        ]}
+      />
       <PublicHero>
         <p className="eyebrow">EMPRESA · IDENTIDAD · EQUIPO</p>
         <h1>Códex Cusco: tecnología y talento de Cusco</h1>

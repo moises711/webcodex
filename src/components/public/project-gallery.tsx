@@ -20,7 +20,15 @@ export function ProjectGallery({
     linkUrl && /^https?:\/\//.test(linkUrl) && URL.canParse(linkUrl);
   return (
     <div className="project-gallery">
-      <Gallery images={sorted.map((image, index) => ({...image, alt: descriptiveImageAlt(image.alt, `${projectTitle}: imagen ${index + 1}`)}))} />
+      <Gallery
+        images={sorted.map((image, index) => ({
+          ...image,
+          alt: descriptiveImageAlt(
+            image.alt,
+            `${projectTitle}: imagen ${index + 1}`,
+          ),
+        }))}
+      />
       {valid && linkText && (
         <a
           className={`button primary project-cover-link ${images.length ? "has-image" : ""}`}

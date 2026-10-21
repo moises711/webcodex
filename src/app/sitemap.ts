@@ -33,5 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: p.updatedAt,
     })),
   ];
-  return entries.filter((entry, index) => entries.findIndex((other) => other.url === entry.url) === index);
+  return entries.filter(
+    (entry, index) =>
+      entries.findIndex((other) => other.url === entry.url) === index,
+  );
 }

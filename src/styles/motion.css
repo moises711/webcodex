@@ -847,3 +847,22 @@
     transform: none;
   }
 }
+
+/* Native scroll progress avoids shipping an animation runtime for one bar. */
+.reading-progress {
+  transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  .public-experience[data-motion="full"] .reading-progress {
+    animation: reading-progress-fill linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes reading-progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

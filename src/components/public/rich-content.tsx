@@ -55,7 +55,9 @@ export function RichContent({ content }: { content: unknown }) {
       case "hardBreak":
         return <br key={key} />;
       case "text": {
-        let text: React.ReactNode = node.text ? correctPublicCopy(node.text) : node.text;
+        let text: React.ReactNode = node.text
+          ? correctPublicCopy(node.text)
+          : node.text;
         for (const mark of node.marks || []) {
           if (mark.type === "bold") text = <strong>{text}</strong>;
           if (mark.type === "italic") text = <em>{text}</em>;

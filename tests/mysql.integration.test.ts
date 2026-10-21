@@ -76,7 +76,10 @@ describe("MySQL compatibility", () => {
         POST(
           new Request("http://localhost:3000/api/page-views", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Origin: "http://localhost:3000",
+            },
             body: JSON.stringify({ visitId }),
           }),
         ),
