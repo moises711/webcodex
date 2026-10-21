@@ -74,8 +74,6 @@ export default async function Page({
         </p>
       </PublicHero>
 
-      <ServiceContent slug={area.slug} />
-
       <div className="area-toolbar">
         <p className="notice">
           Consulta los trabajos publicados y encuentra soluciones para tu
@@ -148,6 +146,7 @@ export default async function Page({
         )}
       </section>
       <RelatedServices current={area.slug} />
+      <ServiceContent slug={area.slug} />
     </div>
   );
 }
