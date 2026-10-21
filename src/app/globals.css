@@ -2205,3 +2205,8 @@ a.service-feature:hover {
 
 .breadcrumb-list { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin-block: 1rem; }
 .breadcrumb-list li + li::before { content: "/"; margin-inline-end: .5rem; }
+
+.service-content { margin-block: 2rem; max-width: 75ch; }
+.service-content li { margin-block: .5rem; }
+.service-content summary { cursor: pointer; font-weight: 600; }
+.service-content details p { margin-block-start: 1rem; }
