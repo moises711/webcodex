@@ -13,7 +13,7 @@ export default function ContactPage() {
       <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Contacto", href: "/contactanos"}]} />
       <PublicHero>
         <p className="eyebrow">ESTAMOS PARA AYUDARTE</p>
-        <h1>Hablemos de tu próximo proyecto.</h1>
+        <h1>Contacta con Códex Cusco para tu proyecto</h1>
         <p className="hero-description">
           Cuéntanos qué necesitas. Escríbenos por WhatsApp o llámanos para
           conversar sobre tu idea.

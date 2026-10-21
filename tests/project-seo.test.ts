@@ -21,7 +21,7 @@ describe("SEO de los trabajos publicados", () => {
   });
   it("uses a unique canonical and descriptive title and image", () => {
     const metadata = projectMetadata(project);
-    expect(metadata.title).toBe("Control de inventarios | Sistema de gestión");
+    expect(metadata.title).toBe("Control de inventarios | Sistema de gestión en Cusco");
     expect(metadata.alternates?.canonical).toBe(
       `${siteUrl}/proyectos/control-inventarios`,
     );

@@ -18,7 +18,7 @@ export default async function Page() {
       <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Servicios", href: "/servicios"}]} />
       <PublicHero>
         <p className="eyebrow">NUESTROS EQUIPOS</p>
-        <h1>Servicios de Códex Cusco</h1>
+        <h1>Servicios tecnológicos en Cusco</h1>
         <p className="hero-description">
           Explora las soluciones y proyectos de cada equipo.
         </p>

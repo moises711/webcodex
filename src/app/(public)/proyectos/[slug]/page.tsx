@@ -47,7 +47,7 @@ export default async function Page({
         <Link href={`/${project.area.slug}`} className="badge">
           {project.area.name}
         </Link>
-        <h1>{project.title}</h1>
+        <h1>{project.title} · Códex Cusco</h1>
         {project.tags.includes("Demostración") && (
           <p className="notice">
             Proyecto de demostración: el contenido y los accesos son ficticios.

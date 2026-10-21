@@ -6,7 +6,7 @@ import { getSettings } from "@/server/queries/public";
 import { Reveal } from "@/components/motion/reveal";
 import { services } from "@/lib/services";
 export const metadata = pageMetadata(
-  "Quiénes somos",
+  "Códex Cusco: soluciones tecnológicas en Cusco",
   "Conoce Códex Cusco: talento local e innovación en software, marketing digital, ciberseguridad y soporte técnico. Nuestra misión y visión.",
   "/empresa",
 );
@@ -17,7 +17,7 @@ export default async function Page() {
       <Breadcrumbs items={[{name: "Inicio", href: "/"}, {name: "Empresa", href: "/empresa"}]} />
       <PublicHero>
         <p className="eyebrow">EMPRESA · IDENTIDAD · EQUIPO</p>
-        <h1>Quiénes somos</h1>
+        <h1>Códex Cusco: tecnología y talento de Cusco</h1>
         <p className="hero-description">
           {settings?.siteName || "Códex Cusco"} brinda soluciones de software,
           marketing digital, ciberseguridad y soporte técnico con talento local

@@ -16,7 +16,7 @@ export function projectMetadata(project: PublicProject) {
       : project.type === "WEBSITE"
         ? "Página web"
         : "Proyecto";
-  const title = `${project.title} | ${kind}`;
+  const title = `${project.title} | ${kind} en Cusco`;
   const metadata = pageMetadata(
     title,
     project.summary,
