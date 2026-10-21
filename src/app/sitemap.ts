@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { portalAreas } from "@/lib/areas";
 import { siteUrl } from "@/lib/seo";
 import { db } from "@/lib/db";
 import { publicWhere } from "@/server/queries/public";
@@ -9,13 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl;
   const [areas, projects] = await Promise.all([
-    db.area.findMany({
-      where: {
-        isActive: true,
-        slug: { in: portalAreas.map((area) => area.slug) },
-      },
-      select: { slug: true },
-    }),
+    db.area.findMany({ where: { isActive: true }, select: { slug: true } }),
     db.project.findMany({
       where: publicWhere,
       select: { slug: true, updatedAt: true },

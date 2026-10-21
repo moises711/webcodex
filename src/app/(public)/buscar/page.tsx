@@ -4,10 +4,7 @@ import {
   ProjectList,
   type Filters,
 } from "@/components/public/project-list";
-export const metadata = {
-  title: "Buscar proyectos",
-  robots: { index: false, follow: true },
-};
+export const metadata = { title: "Buscar proyectos" };
 export default async function Page({
   searchParams,
 }: {

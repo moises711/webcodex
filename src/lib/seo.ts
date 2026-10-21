@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-// Keep public identity stable even when Hostinger builds on a temporary hostname.
-export const siteUrl = "https://codexcusco.com";
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.APP_URL ||
+  "https://codexcusco.com"
+).replace(/\/$/, "");
 export function pageMetadata(
   title: string,
   description: string,

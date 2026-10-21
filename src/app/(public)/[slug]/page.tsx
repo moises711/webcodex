@@ -60,30 +60,6 @@ export default async function Page({
         <p className="hero-description">{area.description}</p>
       </PublicHero>
 
-      {area.slug === "sistemas" && (
-        <section aria-labelledby="web-development-title" className="stack">
-          <h2 id="web-development-title">
-            Diseño y desarrollo de páginas web en Cusco
-          </h2>
-          <p>
-            Creamos páginas web para presentar tu empresa, mostrar tus servicios
-            y facilitar que tus clientes se pongan en contacto contigo.
-            Adaptamos el diseño a tu marca y a la navegación desde celulares y
-            computadoras.
-          </p>
-          <h3>Software y sistemas a medida</h3>
-          <p>
-            Desarrollamos sistemas de gestión y aplicaciones web según los
-            procesos de tu negocio. Revisa nuestros proyectos publicados y
-            conversemos sobre las funciones que necesitas, el alcance y el
-            mantenimiento de tu solución.
-          </p>
-          <Link className="text-link" href="/contactanos">
-            Consultar por una página web o un sistema
-          </Link>
-        </section>
-      )}
-
       <div className="area-toolbar">
         <p className="notice">
           Consulta los trabajos publicados y encuentra soluciones para tu
