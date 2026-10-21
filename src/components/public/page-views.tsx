@@ -75,7 +75,7 @@ export function PageViews() {
         ) : failed ? (
           "Contador temporalmente no disponible."
         ) : (
-          "Cargando visitas…"
+          "Visitas a Códex Cusco"
         )}
       </p>
       {failed && (
