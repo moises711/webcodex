@@ -20,6 +20,9 @@ export default async function Layout({
             "@type": "Organization",
             "@id": `${siteUrl}/#organization`,
             name: "Códex Cusco",
+            alternateName: "Codex Cusco",
+            description:
+              "Diseño y desarrollo de páginas web, software y servicios tecnológicos en Cusco, Perú.",
             url: siteUrl,
             logo: `${siteUrl}/resources/images/codex-cusco-logo.png`,
             email: "codexcusco@gmail.com",

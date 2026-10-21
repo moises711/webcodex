@@ -1,6 +1,6 @@
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
-  "Software, páginas web y marketing en Cusco, Perú",
+  "Diseño y desarrollo de páginas web en Cusco",
   "Códex Cusco: desarrollo de sistemas y páginas web, marketing digital, diseño gráfico, ciberseguridad y soporte técnico para empresas.",
   "/",
 );
@@ -26,14 +26,15 @@ export default async function Home() {
               <span /> CÓDEX CUSCO · SOLUCIONES TECNOLÓGICAS
             </p>
             <h1>
-              Tecnología para tu negocio.
+              Páginas web y software en Cusco.
               <br />
               <span>Desde Cusco, para crecer.</span>
             </h1>
             <p className="hero-description">
-              Desarrollo de software y páginas web, marketing digital,
+              Diseñamos páginas web y desarrollamos sistemas a medida para
+              negocios de Cusco, Perú. También ofrecemos marketing digital,
               ciberseguridad y soporte técnico. Cuéntanos qué necesita tu
-              negocio y conversemos sobre una solución a tu medida.
+              negocio.
             </p>
             <form action="/buscar" className="search-form">
               <label className="sr-only" htmlFor="home-search">
