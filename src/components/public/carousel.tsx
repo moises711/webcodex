@@ -1,4 +1,5 @@
 "use client";
+import { descriptiveImageAlt } from "@/lib/image-alt";
 import Image from "next/image";
 import { useRef } from "react";
 import Link from "next/link";
@@ -75,10 +76,12 @@ export function Carousel({
               />
             )}
             <Image
+              loading={variant === "hero" && c.index === 0 ? "eager" : "lazy"}
+              fetchPriority={variant === "hero" && c.index === 0 ? "high" : "auto"}
               key={`${current.id}-incoming`}
-              className="carousel-incoming"
+              className={c.index === 0 && c.previousIndex === 0 ? "carousel-initial" : "carousel-incoming"}
               src={current.url}
-              alt={current.alt}
+              alt={descriptiveImageAlt(current.alt, `${current.title}: ${current.area}, Códex Cusco`)}
               fill
               sizes="(max-width: 768px) 100vw, 65vw"
               unoptimized={current.url.startsWith("/api/media/")}

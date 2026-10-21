@@ -1,3 +1,4 @@
+import { descriptiveImageAlt } from "@/lib/image-alt";
 import { InteractiveCard } from "@/components/motion/interactive-card";
 import Image from "next/image";
 import { formatWorkDate } from "@/lib/work-date";
@@ -63,7 +64,7 @@ export function ProjectCard({
         {project.cover && (
           <Image
             src={project.cover.url}
-            alt={project.cover.alt}
+            alt={descriptiveImageAlt(project.cover.alt, `Vista de ${project.title}, proyecto de ${project.area.name} de Códex Cusco`)}
             fill
             sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 33vw"
             unoptimized={project.cover.url.startsWith("/api/media/")}

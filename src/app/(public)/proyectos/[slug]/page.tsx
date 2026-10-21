@@ -57,6 +57,7 @@ export default async function Page({
       <div className="detail-layout">
         <div>
           <ProjectGallery
+            projectTitle={project.title}
             images={project.media}
             coverId={project.coverMediaId}
             linkUrl={project.coverLinkUrl}

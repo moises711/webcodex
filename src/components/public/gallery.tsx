@@ -1,4 +1,5 @@
 "use client";
+import { descriptiveImageAlt } from "@/lib/image-alt";
 import Image from "next/image";
 import { useRef } from "react";
 import { useCarousel } from "./use-carousel";
@@ -49,13 +50,14 @@ export function Gallery({
         )}
         <Image
           key={`${current.id}-incoming`}
-          className="carousel-incoming"
+          className={index === 0 && c.previousIndex === 0 ? "carousel-initial" : "carousel-incoming"}
           unoptimized={current.url.startsWith("/api/media/")}
           src={current.url}
-          alt={current.alt}
+          alt={descriptiveImageAlt(current.alt, "Vista del proyecto de Códex Cusco")}
           fill
           sizes="(max-width:900px) 100vw, 65vw"
-          preload
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchPriority={index === 0 ? "high" : "auto"}
         />
       </button>
       {images.length > 1 && (
@@ -102,7 +104,7 @@ export function Gallery({
             <Image
               unoptimized={image.url.startsWith("/api/media/")}
               src={image.url}
-              alt={image.alt}
+              alt={descriptiveImageAlt(image.alt, `Imagen ${i + 1} del proyecto de Códex Cusco`)}
               fill
               sizes="90px"
             />
@@ -129,7 +131,7 @@ export function Gallery({
             <Image
               unoptimized={current.url.startsWith("/api/media/")}
               src={current.url}
-              alt={current.alt}
+              alt={descriptiveImageAlt(current.alt, "Vista del proyecto de Códex Cusco")}
               fill
               sizes="95vw"
             />

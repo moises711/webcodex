@@ -2210,3 +2210,6 @@ a.service-feature:hover {
 .service-content li { margin-block: .5rem; }
 .service-content summary { cursor: pointer; font-weight: 600; }
 .service-content details p { margin-block-start: 1rem; }
+
+.carousel-initial { opacity: 1; animation: none; }
+.page-views { min-height: 4rem; }
