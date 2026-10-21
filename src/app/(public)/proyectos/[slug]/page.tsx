@@ -1,3 +1,4 @@
+import { RelatedServices } from "@/components/public/related-services";
 import { requestNonce } from "@/lib/nonce";
 import Link from "next/link";
 import { projectMetadata, projectStructuredData } from "@/lib/project-seo";
@@ -110,6 +111,7 @@ export default async function Page({
           )}
         </aside>
       </div>
+      <RelatedServices current={project.area.slug} />
     </div>
   );
 }

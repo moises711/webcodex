@@ -1,3 +1,4 @@
+import { RelatedServices } from "@/components/public/related-services";
 import { ServiceContent } from "@/components/public/service-content";
 import { getServiceSeo } from "@/lib/service-seo";
 import { Breadcrumbs } from "@/components/public/breadcrumbs";
@@ -139,6 +140,7 @@ export default async function Page({
           <ProjectList filters={filters} areaId={area.id} path={path} />
         )}
       </section>
+      <RelatedServices current={area.slug} />
     </div>
   );
 }

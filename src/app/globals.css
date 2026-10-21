@@ -2216,3 +2216,5 @@ a.service-feature:hover {
 
 .sr-only { padding: 0; margin: -1px; border: 0; white-space: nowrap; clip-path: inset(50%); }
 .stats strong { font-variant-numeric: tabular-nums; }
+
+.project-detail-link { position: relative; display: block; padding: .75rem 1rem; z-index: 2; text-decoration: underline; }

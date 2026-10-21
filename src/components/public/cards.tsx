@@ -1,6 +1,7 @@
 import { descriptiveImageAlt } from "@/lib/image-alt";
 import { InteractiveCard } from "@/components/motion/interactive-card";
 import Image from "next/image";
+import Link from "next/link";
 import { formatWorkDate } from "@/lib/work-date";
 import { safeUrl } from "./rich-content";
 import { Code2, Palette, Headphones, ShieldCheck } from "lucide-react";
@@ -104,6 +105,7 @@ export function ProjectCard({
       >
         {content}
       </a>
+      <Link className="project-detail-link" href={`/proyectos/${project.slug}`}>Ver ficha de {project.title}</Link>
     </article>
   ) : (
     <InteractiveCard

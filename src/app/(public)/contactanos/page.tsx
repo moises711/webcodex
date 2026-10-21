@@ -1,3 +1,4 @@
+import { RelatedServices } from "@/components/public/related-services";
 import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { pageMetadata } from "@/lib/seo";
 import { Phone, Mail, MessageCircle } from "lucide-react";
@@ -93,6 +94,7 @@ export default function ContactPage() {
           </a>
         </div>
       </section>
+      <RelatedServices />
     </div>
   );
 }
