@@ -6,7 +6,7 @@ type PublicProject = {
   type: string;
   area: { name: string; slug: string };
   cover: { url: string; alt: string } | null;
-  updatedAt: Date;
+  updatedAt: Date | string;
   system: { systemName: string; url: string } | null;
 };
 export function projectMetadata(project: PublicProject) {
@@ -49,7 +49,7 @@ export function projectStructuredData(project: PublicProject) {
         name: project.title,
         description: project.summary,
         inLanguage: "es-PE",
-        dateModified: project.updatedAt.toISOString(),
+        dateModified: new Date(project.updatedAt).toISOString(),
         breadcrumb: { "@id": `${url}#breadcrumbs` },
         mainEntity: { "@id": `${url}#work` },
       },

@@ -3,6 +3,9 @@ const storageUrl = process.env.STORAGE_PUBLIC_URL
   ? new URL(process.env.STORAGE_PUBLIC_URL)
   : null;
 const nextConfig: NextConfig = {
+  output: "standalone",
+  deploymentId:
+    process.env.NEXT_DEPLOYMENT_ID || "hostinger-runtime-repair-20261020",
   outputFileTracingIncludes: {
     "/api/proformas": [
       "./src/server/pdf/fonts/*",

@@ -112,7 +112,7 @@ Una vez publicada la web, verifica la propiedad del dominio en Google Search Con
 
 ## Preparación final del contenido
 El respaldo actualizado conserva los seis proyectos de ejemplo como ARCHIVED; no aparecen en la web ni en su sitemap. No son trabajos reales ni deben republicarse sin reemplazar su contenido. Se conservaron cuentas, imágenes y credenciales cifradas. Para aplicar el mismo cambio en una base ya importada ejecuta `node --env-file=.env.hostinger scripts/prepare-production.mjs`. No ejecutes el seed de demostración.
-Antes de abrir producción, configura las variables privadas AUTH_SECRET, CREDENTIALS_ENC_KEY, DATABASE_URL y las URLs HTTPS del dominio. El almacenamiento S3/R2 es obligatorio para nuevas subidas; configura RESEND_API_KEY y RESEND_FROM para recuperación de contraseña. Revisa los usuarios activos y sus permisos en el panel. Conserva el mismo CREDENTIALS_ENC_KEY para descifrar los accesos existentes. El código preparado no sustituye estas configuraciones del hosting.
+Antes de abrir producción, configura las variables privadas AUTH_SECRET, CREDENTIALS_ENC_KEY, DATABASE_URL y las URLs HTTPS del dominio. Las nuevas subidas requieren S3/R2 o STORAGE_LOCAL_DIR configurado; configura RESEND_API_KEY y RESEND_FROM para recuperación de contraseña. Revisa los usuarios activos y sus permisos en el panel. Conserva el mismo CREDENTIALS_ENC_KEY para descifrar los accesos existentes. El código preparado no sustituye estas configuraciones del hosting.
 
 Las cuentas de prueba admin@codex.local, sistemas@codex.local e ingenieria@codex.local quedan desactivadas; el administrador real conserva su acceso. No exportes .env, .env.postgresql-local, backups privados ni node_modules como archivos públicos.
 
@@ -129,3 +129,58 @@ Consulta `docs/SEGURIDAD.md` antes de desplegar. Las nuevas imágenes se sirven 
 ## Compilación en Hostinger
 
 El comando de compilación es `pnpm build` y ejecuta `next build --webpack`. Tailwind CSS 4 se procesa con `@tailwindcss/postcss` desde `postcss.config.mjs`; no se usa el loader de Turbopack. Conservar el lockfile actualizado. Si hPanel tiene un comando personalizado `next build`, sustituirlo por `pnpm build` para aplicar esta configuración.
+
+
+## Almacenamiento privado persistente en Hostinger
+
+Alternativa autorizada a S3/R2: configura `STORAGE_LOCAL_DIR` en las variables de
+la aplicación con una ruta absoluta privada, por ejemplo
+`/home/USUARIO/domains/DOMINIO/hbuilds/private-media`. Crea esa carpeta con
+permisos `700` y el mismo propietario que ejecuta Node. Debe estar fuera de
+`public_html` y de `hbuilds/versions`: así las imágenes sobreviven a un despliegue.
+Esta opción tiene prioridad sobre S3/R2. No cambies `NODE_ENV=production`.
+
+Las imágenes siguen pasando por `/api/media/[key]` y sus comprobaciones de
+publicación y permisos; no se exponen archivos privados mediante una carpeta
+pública. Incluye la carpeta persistente en los respaldos junto con MySQL.
+Los archivos anteriores siguen pudiendo leerse desde las rutas locales heredadas.
+
+El SDK de S3 se carga únicamente cuando se utiliza ese proveedor. La ausencia de
+sus dependencias en un despliegue no debe bloquear el almacenamiento local.
+Después de configurar y desplegar, verifica una subida desde una cuenta del panel,
+la lectura autorizada de una imagen privada y su persistencia tras un despliegue.
+No basta con que `/api/health` responda: esa ruta solo comprueba MySQL.
+
+
+Para empaquetar por SSH: ejecuta `pnpm build` y `pnpm package:hostinger`.
+El paquete queda en `output/hostinger/nodejs`, sin los archivos `.env` de compilación.
+Colócalo en `hbuilds/versions/<version>/nodejs` y verifica sus módulos antes de activar
+la versión. Su `server.js` carga el entorno privado de `hbuilds/config/.env` y usa
+`hbuilds/private-media` por defecto. No publiques ese archivo de entorno en Git ni
+lo incluyas en el paquete. Conserva la versión anterior para revertir el cambio.
+El despliegue automático estándar de hPanel también puede usar el proveedor local,
+pero requiere configurar `STORAGE_LOCAL_DIR` explícitamente en sus variables.
+
+
+El esquema incluye `native` y `debian-openssl-1.1.x` como `binaryTargets` de
+Prisma: este hosting requiere el segundo aunque el equipo de compilación use
+OpenSSL 3. Ejecuta `prisma generate` antes de compilar y conserva ambos motores
+en el paquete. Comprueba consultas autenticadas, no solo el arranque del proceso.
+
+
+Configura `NEXT_DEPLOYMENT_ID` con un identificador único de la publicación
+antes de compilar. Next añade `?dpl=` a los archivos y detecta cambios de versión
+en la navegación del cliente. La versión de reparación usa un identificador de
+respaldo para no reutilizar archivos vacíos cacheados durante el incidente.
+
+## Reparación de despliegue automático — 21/10/2026
+
+El error real está en nodejs/console.log: Cannot find module
+@swc/helpers/_/_interop_require_default al cargar Next por la ruta de LiteSpeed.
+El postbuild prepara los alias de @swc/helpers, react y .prisma dentro del
+standalone, prueba su resolución y agrega el bootstrap que lee hbuilds/config/.env.
+El mismo bootstrap conserva el almacenamiento privado hbuilds/private-media.
+No se incluyen secretos en el paquete. No reemplazar el .env privado ni regenerar
+CREDENTIALS_ENC_KEY. Hostinger debe ejecutar pnpm run build (con postbuild).
+Tras publicar comprobar /robots.txt, /favicon.ico, /api/health y la página principal.
+Compilación completada no equivale a aplicación saludable.

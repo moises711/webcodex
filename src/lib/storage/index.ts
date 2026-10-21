@@ -1,9 +1,4 @@
 import "server-only";
-import {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-} from "@aws-sdk/client-s3";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import path from "node:path";
 export interface StorageProvider {
@@ -14,24 +9,38 @@ export interface StorageProvider {
   ): Promise<{ url: string; storageKey: string }>;
 }
 class LocalStorage implements StorageProvider {
+  private directory() {
+    const configured = process.env.STORAGE_LOCAL_DIR;
+    if (configured && !path.isAbsolute(configured))
+      throw new Error("STORAGE_LOCAL_DIR debe ser una ruta absoluta privada");
+    return (
+      configured || path.join(process.cwd(), ".local", "resources", "images")
+    );
+  }
   async download(key: string) {
     if (!/^[0-9a-f-]{36}\.webp$/.test(key))
       throw new Error("Invalid media key");
-    return readFile(
-      path.join(process.cwd(), ".local", "resources", "images", key),
-    ).catch(() => readFile(path.join(process.cwd(), ".local", "media", key)));
+    return readFile(path.join(this.directory(), key))
+      .catch(() =>
+        readFile(
+          path.join(process.cwd(), ".local", "resources", "images", key),
+        ),
+      )
+      .catch(() => readFile(path.join(process.cwd(), ".local", "media", key)));
   }
   async upload(key: string, data: Buffer) {
-    const directory = path.join(process.cwd(), ".local", "resources", "images");
+    if (!/^[0-9a-f-]{36}\.webp$/.test(key))
+      throw new Error("Invalid media key");
+    const directory = this.directory();
     await mkdir(directory, { recursive: true });
     await writeFile(path.join(directory, key), data);
     return { url: `/api/media/${key}`, storageKey: `local/${key}` };
   }
 }
 class S3Storage implements StorageProvider {
-  client: S3Client;
-  constructor() {
-    this.client = new S3Client({
+  private async client() {
+    const { S3Client } = await import("@aws-sdk/client-s3");
+    return new S3Client({
       region: process.env.STORAGE_REGION || "auto",
       endpoint: process.env.STORAGE_ENDPOINT,
       credentials: {
@@ -43,7 +52,10 @@ class S3Storage implements StorageProvider {
   async download(key: string) {
     if (!/^[0-9a-f-]{36}\.webp$/.test(key))
       throw new Error("Invalid media key");
-    const object = await this.client.send(
+    const { GetObjectCommand } = await import("@aws-sdk/client-s3");
+    const object = await (
+      await this.client()
+    ).send(
       new GetObjectCommand({ Bucket: process.env.STORAGE_BUCKET, Key: key }),
     );
     if (!object.Body || (object.ContentLength || 0) > 20 * 1024 * 1024)
@@ -51,7 +63,10 @@ class S3Storage implements StorageProvider {
     return object.Body.transformToByteArray();
   }
   async upload(key: string, data: Buffer) {
-    await this.client.send(
+    const { PutObjectCommand } = await import("@aws-sdk/client-s3");
+    await (
+      await this.client()
+    ).send(
       new PutObjectCommand({
         Bucket: process.env.STORAGE_BUCKET,
         Key: key,
@@ -66,6 +81,11 @@ class S3Storage implements StorageProvider {
   }
 }
 export function storageProvider(): StorageProvider {
+  if (process.env.STORAGE_LOCAL_DIR) {
+    if (!path.isAbsolute(process.env.STORAGE_LOCAL_DIR))
+      throw new Error("STORAGE_LOCAL_DIR debe ser una ruta absoluta privada");
+    return new LocalStorage();
+  }
   if (
     process.env.STORAGE_BUCKET &&
     process.env.STORAGE_ACCESS_KEY_ID &&

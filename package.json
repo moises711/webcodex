@@ -26,7 +26,9 @@
     "db:areas": "tsx --env-file=.env scripts/consolidate-areas.ts",
     "production:prepare": "node --env-file=.env scripts/prepare-production.mjs",
     "security:check": "pnpm audit --prod && vitest run tests/security.test.ts tests/security-routes.test.ts tests/private-media-security.test.ts tests/recovery-security.test.ts tests/permissions.test.ts tests/crypto.test.ts tests/content-rules.test.ts tests/project-seo.test.ts tests/proforma.test.ts",
-    "security:maintenance": "node --env-file=.env scripts/security-maintenance.mjs"
+    "security:maintenance": "node --env-file=.env scripts/security-maintenance.mjs",
+    "package:hostinger": "node scripts/package-hostinger.mjs",
+    "postbuild": "node scripts/prepare-hostinger-runtime.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1149.0",

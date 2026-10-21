@@ -12,6 +12,13 @@ const project = {
   system: { systemName: "Inventarios", url: "https://example.com" },
 };
 describe("SEO de los trabajos publicados", () => {
+  it("accepts dates serialized by the server cache", () => {
+    const data = projectStructuredData({
+      ...project,
+      updatedAt: "2026-10-20T12:00:00.000Z",
+    });
+    expect(data["@graph"][0].dateModified).toBe("2026-10-20T12:00:00.000Z");
+  });
   it("uses a unique canonical and descriptive title and image", () => {
     const metadata = projectMetadata(project);
     expect(metadata.title).toBe("Control de inventarios | Sistema de gestión");
