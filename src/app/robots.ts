@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: ["/", "/api/media/"],
-      disallow: ["/panel", "/api/", "/ingresar", "/cambiar-clave"],
+      disallow: ["/panel", "/api/", "/ingresar", "/cambiar-clave", "/recuperar", "/restablecer"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

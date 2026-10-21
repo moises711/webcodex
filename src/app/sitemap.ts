@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       select: { slug: true, updatedAt: true },
     }),
   ]);
-  return [
+  const entries: MetadataRoute.Sitemap = [
     { url: base },
     { url: `${base}/servicios` },
     { url: `${base}/empresa` },
@@ -33,4 +33,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: p.updatedAt,
     })),
   ];
+  return entries.filter((entry, index) => entries.findIndex((other) => other.url === entry.url) === index);
 }
