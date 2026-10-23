@@ -1,9 +1,9 @@
 export const serviceContent = {
   sistemas: {
     intro:
-      "Una página web debe explicar qué ofrece tu negocio y facilitar el contacto. En Códex Cusco también desarrollamos software para organizar procesos que una página informativa no resuelve. Definimos contigo qué conviene construir y cómo mantenerlo.",
+      "Un sistema de gestión reúne registros y tareas que tu equipo necesita consultar cada día. En Códex Cusco definimos los módulos, usuarios y reportes para organizar la operación de tu negocio. En esta sección puedes explorar sistemas y otros proyectos del área de desarrollo.",
     includes: [
-      "Diseño de páginas informativas y catálogos con navegación adaptada a celulares y computadoras.",
+      "Análisis del flujo de trabajo, responsables y registros que necesita tu operación.",
       "Desarrollo de software a medida: formularios, paneles, reservas o procesos de gestión según los requisitos acordados.",
       "Organización del contenido, enlaces de contacto y configuración técnica de publicación.",
       "Revisión de funcionamiento, entrega y definición del mantenimiento que necesitará la solución.",
@@ -39,17 +39,17 @@ export const serviceContent = {
   },
   marketing: {
     intro:
-      "El marketing digital empieza por entender a quién quieres llegar y qué mensaje necesita tu negocio. Trabajamos la comunicación y el diseño gráfico para presentar una marca coherente en sus canales digitales, con objetivos y piezas definidos antes de producir.",
+      "El marketing digital empieza por entender a quién quieres llegar, qué ofreces y qué acción esperas del cliente. Planificamos la comunicación de tu negocio en los canales adecuados, con objetivos, contenidos y responsabilidades definidos antes de publicar.",
     includes: [
       "Revisión de la comunicación actual, público objetivo y objetivos de la campaña o proyecto.",
-      "Diseño de identidad visual y piezas gráficas según el alcance contratado.",
+      "Definición de mensajes, canales e indicadores para evaluar la comunicación.",
       "Planificación de temas, formatos y contenidos para los canales seleccionados.",
-      "Coordinación de materiales, revisiones y entrega de los archivos acordados.",
+      "Coordinación de materiales, calendario de publicación y revisión de los indicadores disponibles.",
     ],
     process: [
       "Conocemos tu negocio, tu público y los canales que utilizas en Cusco o fuera de la ciudad.",
       "Acordamos objetivos, piezas, calendario, responsabilidades y presupuesto.",
-      "Preparamos las propuestas de diseño y contenido para revisión.",
+      "Preparamos las propuestas de comunicación y contenido para revisión.",
       "Entregamos o coordinamos la publicación y revisamos los indicadores disponibles.",
     ],
     faqs: [

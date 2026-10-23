@@ -324,3 +324,16 @@ Implementados Motion, escena de circuitos con proyección de profundidad, reveal
 - [x] 10. Canonical, Open Graph, Twitter y comprobador HTTP reproducible.
 - [x] Lint, TypeScript, compilación Hostinger y 71 pruebas locales.
 - [ ] Revisar Core Web Vitals de campo y evolución de consultas en Search Console.
+
+## Separación de servicios para búsqueda — 22/10/2026
+
+- [x] Páginas independientes para diseño web, software a medida, tiendas virtuales, webs de agencias y diseño gráfico, con contenido original por intención.
+- [x] Títulos, descripciones, canonical, H1, subtítulos, Service y breadcrumbs por página.
+- [x] Enlaces desde inicio, servicios, menú y servicios relacionados; sitemap y navegación móvil actualizados.
+- [x] Proyectos WEBSITE y SYSTEM separados en las nuevas páginas; catálogo /sistemas conservado.
+- [x] Marketing centrado en estrategia y contenido, con enlace a diseño gráfico independiente.
+- [ ] Publicar y comprobar las cinco páginas en producción; inspeccionar indexación y consultas en Search Console.
+
+- [x] Validación: compilación, TypeScript, lint y 13 pruebas SEO; nueve páginas verificadas por HTTP, título, canonical y H1 en navegador local, con 375/768/1280 px y ambos temas; menú y navegación móvil comprobados.
+
+- [x] Información al final de cada servicio resumida en una tarjeta con descripción, tres puntos de alcance y contacto; retirados los bloques largos y FAQPage no visible. Tarjetas verificadas en móvil, tableta y escritorio; nueve pruebas SEO correctas.

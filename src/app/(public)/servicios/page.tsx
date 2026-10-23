@@ -1,3 +1,4 @@
+import { serviceLandings } from "@/lib/service-landings";
 import { Breadcrumbs } from "@/components/public/breadcrumbs";
 import { PublicHero } from "@/components/public/public-hero";
 import { getAreas } from "@/server/queries/public";
@@ -25,10 +26,31 @@ export default async function Page() {
         <p className="eyebrow">NUESTROS EQUIPOS</p>
         <h1>Servicios tecnológicos en Cusco</h1>
         <p className="hero-description">
-          Explora las soluciones y proyectos de cada equipo.
+          Diseño de páginas web, software a medida, tiendas virtuales,
+          marketing, diseño gráfico, ciberseguridad y soporte para tu negocio en
+          Cusco.
         </p>
       </PublicHero>
 
+      <section className="section" aria-labelledby="dedicated-services-title">
+        <h2 id="dedicated-services-title">
+          Encuentra el servicio que necesita tu negocio
+        </h2>
+        <div className="cards-grid specialties-grid">
+          {serviceLandings.map((page) => (
+            <Link
+              key={page.slug}
+              href={`/${page.slug}`}
+              className="panel-card service-feature"
+            >
+              <h3>{page.title}</h3>
+              <p className="notice">{page.description}</p>
+              <span className="text-link">Conocer el servicio</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <h2>Más servicios y equipos</h2>
       <div className="cards-grid specialties-grid">
         {services.map((service, index) => (
           <Link

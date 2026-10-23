@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Headphones,
 } from "lucide-react";
+import { serviceLandings } from "@/lib/service-landings";
 import { portalAreas } from "@/lib/areas";
 const serviceIcons = { Code2, Palette, ShieldCheck, Headphones };
 export function Navigation({
@@ -19,6 +20,31 @@ export function Navigation({
   areas: { slug: string; name: string }[];
 }) {
   const path = usePathname();
+  const menuServices = [
+    ...serviceLandings.map((page) => ({
+      slug: page.slug,
+      name: page.name,
+      icon: page.icon,
+      description: page.description,
+    })),
+    ...areas.map((area) => {
+      const info = portalAreas.find((item) => item.slug === area.slug);
+      return {
+        ...area,
+        name:
+          area.slug === "sistemas"
+            ? "Sistemas de gestión"
+            : area.slug === "marketing"
+              ? "Marketing digital"
+              : area.name,
+        icon: info?.icon || "Code2",
+        description:
+          area.slug === "marketing"
+            ? "Estrategia, contenido y comunicación para tu negocio."
+            : info?.description,
+      };
+    }),
+  ];
   const [mobile, setMobile] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const servicesTrigger = useRef<HTMLButtonElement>(null);
@@ -99,10 +125,8 @@ export function Navigation({
               className="areas-dropdown services-dropdown"
             >
               <p className="services-menu-label">SOLUCIONES PARA TU NEGOCIO</p>
-              {areas.map((area) => {
-                const info = portalAreas.find(
-                  (item) => item.slug === area.slug,
-                );
+              {menuServices.map((area) => {
+                const info = area;
                 const Icon = serviceIcons[info?.icon || "Code2"];
                 return (
                   <Link

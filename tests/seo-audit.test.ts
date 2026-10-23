@@ -128,6 +128,11 @@ describe("public SEO audit", () => {
       "ciberseguridad",
       "soporte-tecnico",
       "proyectos/inventario",
+      "paginas-web-cusco",
+      "software-a-medida-cusco",
+      "tiendas-virtuales-cusco",
+      "paginas-web-agencias-viajes",
+      "diseno-grafico-cusco",
     ])
       expect(
         entries.some((item) => item.url === `https://codexcusco.com/${slug}`),

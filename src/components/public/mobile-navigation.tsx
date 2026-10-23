@@ -1,4 +1,5 @@
 "use client";
+import { serviceLandings } from "@/lib/service-landings";
 import Link from "next/link";
 import { portalAreas } from "@/lib/areas";
 import { usePathname } from "next/navigation";
@@ -17,7 +18,8 @@ export function MobileNavigation() {
       {tabs.map(({ href, label, icon: Icon }) => {
         const active =
           href === "/servicios"
-            ? portalAreas.some((area) => pathname === `/${area.slug}`) ||
+            ? serviceLandings.some((page) => pathname === `/${page.slug}`) ||
+              portalAreas.some((area) => pathname === `/${area.slug}`) ||
               pathname.startsWith("/servicios") ||
               pathname.startsWith("/proyectos")
             : pathname === href;

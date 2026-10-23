@@ -1,3 +1,4 @@
+import { serviceLandings } from "@/lib/service-landings";
 import type { MetadataRoute } from "next";
 import { portalAreas } from "@/lib/areas";
 import { siteUrl } from "@/lib/seo";
@@ -24,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [
     { url: base },
     { url: `${base}/servicios` },
+    ...serviceLandings.map((page) => ({ url: `${base}/${page.slug}` })),
     { url: `${base}/empresa` },
     { url: `${base}/contactanos` },
     { url: `${base}/aviso` },

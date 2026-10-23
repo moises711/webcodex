@@ -1,21 +1,21 @@
 export const serviceSeo = {
   sistemas: {
-    title: "Páginas web y desarrollo de software en Cusco",
+    title: "Sistemas de gestión a medida en Cusco, Perú",
     description:
-      "Diseño de páginas web y desarrollo de software a medida en Cusco. Presenta tu negocio, organiza tus procesos y consulta tu proyecto con Códex Cusco.",
+      "Sistemas de gestión a medida en Cusco, Perú. Organiza registros, usuarios, procesos y reportes de tu empresa con Códex Cusco.",
   },
   marketing: {
-    title: "Marketing digital y diseño gráfico en Cusco",
+    title: "Marketing digital en Cusco, Perú",
     description:
-      "Marketing digital, identidad visual y diseño gráfico en Cusco. Planifica el contenido y la comunicación de tu negocio con Códex Cusco.",
+      "Marketing digital en Cusco, Perú: estrategia, planificación de contenido y comunicación en canales digitales. Consulta tu proyecto con Códex Cusco.",
   },
   ciberseguridad: {
-    title: "Ciberseguridad en Cusco para empresas",
+    title: "Ciberseguridad en Cusco, Perú",
     description:
       "Ciberseguridad en Cusco: evaluación de riesgos, protección de sistemas y orientación para prevenir incidentes. Consulta el alcance con Códex Cusco.",
   },
   "soporte-tecnico": {
-    title: "Soporte técnico y mantenimiento en Cusco",
+    title: "Soporte técnico en Cusco, Perú",
     description:
       "Soporte técnico en Cusco para equipos, programas y redes. Diagnóstico, mantenimiento y asistencia para tu negocio con Códex Cusco.",
   },

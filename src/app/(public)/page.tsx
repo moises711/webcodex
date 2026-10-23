@@ -1,3 +1,4 @@
+import { serviceLandings } from "@/lib/service-landings";
 import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata(
   "Diseño y desarrollo de páginas web en Cusco",
@@ -104,6 +105,23 @@ export default async function Home() {
           ))}
         </div>
       </Ambient>
+      <section
+        className="section container"
+        aria-labelledby="home-services-title"
+      >
+        <div className="section-heading">
+          <h2 id="home-services-title">Servicios digitales en Cusco</h2>
+          <Link href="/servicios">Ver todos los servicios</Link>
+        </div>
+        <div className="cards-grid">
+          {serviceLandings.map((page) => (
+            <Link key={page.slug} href={`/${page.slug}`} className="panel-card">
+              <h3>{page.title}</h3>
+              <p>{page.description}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
       <section id="areas" className="section container showcase-section">
         <Reveal>
           <div className="section-heading">
